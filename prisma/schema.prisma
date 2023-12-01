@@ -9,3 +9,55 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Query {
+  idQuery   Int      @id @default(autoincrement())
+  name      String
+  date      DateTime
+  question  String
+  answer    String   @default("")
+}
+
+model Member {
+  idMember Int       @id @default(autoincrement())
+  name     String
+  birthday DateTime
+  domicile String
+  telp     String
+  // Relationships
+  Booking  Booking[]
+}
+
+model Room {
+  idRoom       Int       @id @default(autoincrement())
+  roomName     String
+  roomType     String
+  roomSize     Int
+  capacity     Int
+  availability String    // Could be an enum: enum Availability { AVAILABLE, BOOKED }
+  price        Int
+  description  String
+  // Relationships
+  Booking      Booking[]
+}
+
+model Booking {
+  idBooking    Int       @id @default(autoincrement())
+  idMember     Int
+  idRoom       Int
+  bookerName   String
+  bookingMade  DateTime
+  reservedTime DateTime
+
+  // Relations
+  Member       Member    @relation(fields: [idMember], references: [idMember])
+  Room         Room      @relation(fields: [idRoom], references: [idRoom])
+}
+
+model Payment {
+  idPayment    Int       @id @default(autoincrement())
+  payerName    String
+  accountNo    String
+  timeReceived DateTime
+  status       String    // Could be an enum: enum PaymentStatus { FAILED, PROCESSING, SUCCEED }
+}

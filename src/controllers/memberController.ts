@@ -88,7 +88,7 @@ route.post('/', async (req, res)=>{
 route.put('/:id', async (req, res)=>{
     const id = Number(req.params.id)
     const { name,birthday,domicile,telp } = req.body
-    var response : apiResponse<Student>; 
+    var response : apiResponse<Member>; 
     try {
         if (name == "" || birthday == "" || domicile == "" || telp == ""){
             throw error

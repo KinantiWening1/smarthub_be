@@ -10,22 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Query {
-  idQuery   Int      @id @default(autoincrement())
-  name      String
-  date      DateTime
-  question  String
-  answer    String   @default("")
-}
-
 model Member {
   idMember Int       @id @default(autoincrement())
   name     String
   birthday DateTime
   domicile String
   telp     String
-  // Relationships
-  Booking  Booking[]
 }
 
 model Room {
@@ -50,14 +40,5 @@ model Booking {
   reservedTime DateTime
 
   // Relations
-  Member       Member    @relation(fields: [idMember], references: [idMember])
   Room         Room      @relation(fields: [idRoom], references: [idRoom])
-}
-
-model Payment {
-  idPayment    Int       @id @default(autoincrement())
-  payerName    String
-  accountNo    String
-  timeReceived DateTime
-  status       String    // Could be an enum: enum PaymentStatus { FAILED, PROCESSING, SUCCEED }
 }

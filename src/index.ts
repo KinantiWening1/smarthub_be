@@ -3,8 +3,6 @@ const app = express()
 const port = process.env.PORT || 5000; 
 import bookingRoutes from './controllers/bookingController';
 import memberRoutes from './controllers/memberController'; 
-import paymentRoutes from './controllers/paymentController'; 
-import queryRoutes from './controllers/queryController'; 
 import roomRoutes from './controllers/roomController'; 
 
 const cors = require("cors");
@@ -23,6 +21,4 @@ app.listen(port, () =>{
 app.use(express.json())
 app.use('/booking', bookingRoutes)
 app.use('/member', memberRoutes)
-app.use('/payment', paymentRoutes)
-app.use('/query', queryRoutes)
 app.use('/room', roomRoutes)

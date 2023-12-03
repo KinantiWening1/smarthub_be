@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,9 +8,9 @@ datasource db {
 }
 
 model Member {
-  idMember Int       @id @default(autoincrement())
+  idMember Int      @id @default(autoincrement())
   name     String
-  birthday DateTime
+  birthday DateTime @db.Date
   domicile String
   telp     String
 }
@@ -24,20 +21,17 @@ model Room {
   roomType     String
   roomSize     Int
   capacity     Int
-  availability String    // Could be an enum: enum Availability { AVAILABLE, BOOKED }
+  availability String
   price        Int
   description  String
-  // Relationships
   Booking      Booking[]
 }
 
 model Booking {
-  idBooking    Int       @id @default(autoincrement())
+  idBooking    Int      @id @default(autoincrement())
   idRoom       Int
   bookerName   String
   bookingMade  DateTime
   reservedTime DateTime
-
-  // Relations
-  Room         Room      @relation(fields: [idRoom], references: [idRoom])
+  Room         Room     @relation(fields: [idRoom], references: [idRoom])
 }

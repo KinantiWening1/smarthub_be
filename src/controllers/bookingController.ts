@@ -38,12 +38,11 @@ route.get('/:id', async (req, res) => {
 
 // Post new booking
 route.post('/', async (req, res) => {
-    const { idMember, idRoom, bookerName, bookingMade, reservedTime } = req.body;
+    const { idRoom, bookerName, bookingMade, reservedTime } = req.body;
     var response: apiResponse<Booking>;
     try {
         const createBooking = await prisma.booking.create({
             data: {
-                idMember,
                 idRoom,
                 bookerName,
                 bookingMade: new Date(bookingMade),
@@ -69,13 +68,12 @@ route.post('/', async (req, res) => {
 // Update booking by id
 route.put('/:id', async (req, res) => {
     const id = Number(req.params.id);
-    const { idMember, idRoom, bookerName, bookingMade, reservedTime } = req.body;
+    const { idRoom, bookerName, bookingMade, reservedTime } = req.body;
     var response: apiResponse<Booking>;
     try {
         const updateBooking = await prisma.booking.update({
             where: { idBooking: id },
             data: {
-                idMember,
                 idRoom,
                 bookerName,
                 bookingMade: new Date(bookingMade),

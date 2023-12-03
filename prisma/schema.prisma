@@ -33,7 +33,6 @@ model Room {
 
 model Booking {
   idBooking    Int       @id @default(autoincrement())
-  idMember     Int
   idRoom       Int
   bookerName   String
   bookingMade  DateTime

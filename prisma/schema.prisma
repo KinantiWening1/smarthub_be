@@ -31,7 +31,7 @@ model Booking {
   idBooking    Int      @id @default(autoincrement())
   idRoom       Int
   bookerName   String
-  bookingMade  DateTime
+  bookingMade  DateTime @default(now())
   reservedTime DateTime
   Room         Room     @relation(fields: [idRoom], references: [idRoom])
 }

@@ -8,7 +8,7 @@ import roomRoutes from './controllers/roomController';
 
 const app = express()
 dotenv.config()
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 const database_url = process.env.DATABASE_URL;
 
 if ( database_url === undefined ) throw new Error( "DATABASE_URL is not provided" )

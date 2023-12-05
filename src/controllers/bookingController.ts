@@ -43,9 +43,9 @@ route.post('/', async (req, res) => {
     try {
         const createBooking = await prisma.booking.create({
             data: {
-                idRoom,
+                idRoom: Number(idRoom),
                 bookerName,
-                bookingMade: new Date(bookingMade),
+                bookingMade: new Date(),
                 reservedTime: new Date(reservedTime)
             }
         });

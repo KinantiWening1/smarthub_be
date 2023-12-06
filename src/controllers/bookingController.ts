@@ -68,7 +68,7 @@ route.post('/', async (req, res) => {
 // Update booking by id
 route.put('/:id', async (req, res) => {
     const id = Number(req.params.id);
-    const { idRoom, bookerName, bookingMade, reservedTime } = req.body;
+    const { idRoom, bookerName, reservedTime } = req.body;
     var response: apiResponse<Booking>;
     try {
         const updateBooking = await prisma.booking.update({
@@ -76,8 +76,7 @@ route.put('/:id', async (req, res) => {
             data: {
                 idRoom,
                 bookerName,
-                bookingMade: new Date(bookingMade),
-                reservedTime: new Date(reservedTime)
+                reservedTime
             }
         });
         response = {

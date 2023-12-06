@@ -106,23 +106,22 @@ route.put( '/:id', async ( req, res ) => {
 // Delete room by id
 route.delete( '/:id', async ( req, res ) => {
     const id = Number( req.params.id );
-    var response: apiResponse<Room>;
     try {
         const deleteRoom = await prisma.room.delete( { where: { idRoom: id } } );
-        response = {
+        const response: apiResponse<Room> = {
             status: "valid",
             message: "DELETE data berhasil",
-            data: null
+            data: deleteRoom
         };
+        return res.status( 200 ).json( response )
     } catch ( error ) {
-        console.log( "Error deleting room:", ( error as Error ).message );
-        response = {
+        const response: apiResponse<Error> = {
             status: "invalid",
             message: "DELETE data gagal",
-            data: null
+            data: error as Error
         };
+        return res.status( 400 ).json( response )
     }
-    res.json( response );
 } );
 
 export default route;

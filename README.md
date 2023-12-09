@@ -1,6 +1,6 @@
 # SMARTHUB COWORKING SPACE
 Disusun oleh Kelompok 9 K02 yang beranggotakan :
-- Kinanti Wening Asih
+- Kinanti Wening Asih / 18221044
 - Michelle Lim / 18221052
 - Esther Regina / 18221086
 - Angela Geraldine Hasian Panjaitan / 18221158

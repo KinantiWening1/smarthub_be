@@ -16,23 +16,13 @@ if ( NODE_ENV !== "PROD" && NODE_ENV !== "DEV" && NODE_ENV !== "TEST" ) throw ne
 if ( database_url === undefined ) throw new Error( "DATABASE_URL is not provided" )
 
 const corsOptions = {
-	origin: ['http://localhost:4173', 'https://smarthubcoworking.netlify.app'],
-	credentials: true,
-	optionSuccessStatus: 200,
-  };
+	origin: (origin: any, callback:any) => {
+	  const whitelist = ['http://localhost:4173', 'https://smarthubcoworking.netlify.app'];
   
-const whitelist = [ /.*localhost.*$/, "https://smarthubcoworking.netlify.app" ];
-  
-app.use(cors({
-	origin: (origin, callback) => {
-	  if (NODE_ENV === "DEV" || origin === undefined) return callback(null, true);
-	  for (const originCheck of whitelist) {
-		if (typeof originCheck === 'string' && originCheck === origin) {
-		  return callback(null, true);
-		} else if (originCheck instanceof RegExp && originCheck.test(origin as string)) {
-		  return callback(null, true);
-		}
+	  if (process.env.NODE_ENV === "DEV" || whitelist.includes(origin)) {
+		return callback(null, true);
 	  }
+  
 	  return callback(new Error("Not Allowed by CORS"));
 	},
 	credentials: true,
@@ -45,7 +35,10 @@ app.use(cors({
 	  "X-Forwarded-For",
 	],
 	optionsSuccessStatus: 204,
-}));
+  };
+  
+app.use(cors(corsOptions));
+
   
 app.use( express.json() )
 

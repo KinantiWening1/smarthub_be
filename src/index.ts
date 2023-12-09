@@ -16,12 +16,12 @@ if ( NODE_ENV !== "PROD" && NODE_ENV !== "DEV" && NODE_ENV !== "TEST" ) throw ne
 if ( database_url === undefined ) throw new Error( "DATABASE_URL is not provided" )
 
 const corsOptions = {
-	origin: ['http://localhost:4173', 'https://smarthubcoworking.netlify.app/'],
+	origin: ['http://localhost:4173', 'https://smarthubcoworking.netlify.app'],
 	credentials: true,
 	optionSuccessStatus: 200,
   };
   
-const whitelist = [ /.*localhost.*$/, "https://smarthubcoworking.netlify.app/" ];
+const whitelist = [ /.*localhost.*$/, "https://smarthubcoworking.netlify.app" ];
   
 app.use(cors({
 	origin: (origin, callback) => {
